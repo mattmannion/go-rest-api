@@ -1,0 +1,12 @@
+{
+  "nodemonConfig": {
+    "ext": "go",
+    "signal": "SIGTERM",
+    "exec": "go run src/*.go || exit 1"
+  },
+  "scripts": {
+    "d": "nodemon",
+    "b": "go build -o dist/server src/*.go",
+    "r": "npm run b && ./dist/server"
+  }
+}
