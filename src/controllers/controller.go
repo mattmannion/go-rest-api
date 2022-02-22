@@ -75,12 +75,6 @@ func nf(w http.ResponseWriter, r *http.Request) {
 	w.Write(json)
 }
 
-func options(w http.ResponseWriter, r *http.Request) {
-	json, _ := json.Marshal(data{Status: "options"})
-
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(200)
-	w.Write(json)
-}
+func options(w http.ResponseWriter, r *http.Request) { w.WriteHeader(200) }
 
 func head(w http.ResponseWriter, r *http.Request) { w.WriteHeader(200) }
