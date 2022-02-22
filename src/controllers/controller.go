@@ -52,10 +52,10 @@ func ControlSwitch(m Methods) http.HandlerFunc {
 				m.Delete(w, r)
 
 			case http.MethodOptions:
-				options(w, r)
+				ex(w, r)
 
 			case http.MethodHead:
-				head(w, r)
+				ex(w, r)
 
 			default:
 				nf(w, r)
@@ -75,6 +75,4 @@ func nf(w http.ResponseWriter, r *http.Request) {
 	w.Write(json)
 }
 
-func options(w http.ResponseWriter, r *http.Request) { w.WriteHeader(200) }
-
-func head(w http.ResponseWriter, r *http.Request) { w.WriteHeader(200) }
+func ex(w http.ResponseWriter, r *http.Request) { w.WriteHeader(200) }
