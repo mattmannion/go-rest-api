@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"encoding/json"
-	"log"
 	"net/http"
 )
 
@@ -69,10 +68,7 @@ type data struct {
 }
 
 func nf(w http.ResponseWriter, r *http.Request) {
-	json, err := json.Marshal(data{Status: "endpoint not available"})
-	if err != nil {
-		log.Fatal(err)
-	}
+	json, _ := json.Marshal(data{Status: "endpoint not available"})
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(404)
@@ -80,10 +76,7 @@ func nf(w http.ResponseWriter, r *http.Request) {
 }
 
 func options(w http.ResponseWriter, r *http.Request) {
-	json, err := json.Marshal(data{Status: "options"})
-	if err != nil {
-		log.Fatal(err)
-	}
+	json, _ := json.Marshal(data{Status: "options"})
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(200)
