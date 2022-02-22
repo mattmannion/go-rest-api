@@ -52,18 +52,24 @@ func ControlSwitch(m Methods) http.HandlerFunc {
 				}
 				m.Delete(w, r)
 
+			case http.MethodOptions:
+				options(w, r)
+
+			case http.MethodHead:
+				head(w, r)
+
 			default:
 				nf(w, r)
 			}
 		})
 }
 
-type not_found struct {
+type data struct {
 	Status string `json:"status"`
 }
 
 func nf(w http.ResponseWriter, r *http.Request) {
-	json, err := json.Marshal(not_found{Status: "No endpoint found"})
+	json, err := json.Marshal(data{Status: "endpoint not available"})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -72,3 +78,16 @@ func nf(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(404)
 	w.Write(json)
 }
+
+func options(w http.ResponseWriter, r *http.Request) {
+	json, err := json.Marshal(data{Status: "options"})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(200)
+	w.Write(json)
+}
+
+func head(w http.ResponseWriter, r *http.Request) { w.WriteHeader(200) }
