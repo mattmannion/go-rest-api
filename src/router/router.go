@@ -11,7 +11,6 @@ var Router http.Handler
 
 func init() {
 	mux = http.NewServeMux()
-
 	mux.HandleFunc("/", controller_root.RootRouter)
 
 	Router = middleware.MW(mux)

@@ -3,6 +3,7 @@ package controllers
 import (
 	"encoding/json"
 	"net/http"
+	"strings"
 )
 
 type controller http.HandlerFunc
@@ -18,7 +19,7 @@ type Methods struct {
 func ControlSwitch(m Methods) http.HandlerFunc {
 	return http.HandlerFunc(
 		func(w http.ResponseWriter, r *http.Request) {
-			method := r.Method
+			method := strings.ToUpper(r.Method)
 
 			switch method {
 			case http.MethodGet:
@@ -39,7 +40,7 @@ func ControlSwitch(m Methods) http.HandlerFunc {
 				}
 				m.Put(w, r)
 
-			case http.MethodPatch, "patch":
+			case http.MethodPatch:
 				if m.Patch == nil {
 					m.Patch = nf
 				}
