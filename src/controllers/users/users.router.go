@@ -6,4 +6,6 @@ import (
 )
 
 var Router http.HandlerFunc = controllers.ControlSwitch(
-	controllers.Methods{})
+	controllers.Methods{
+		Get: get,
+	})

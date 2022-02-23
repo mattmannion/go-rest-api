@@ -7,16 +7,16 @@ import (
 	"mm/pkg/src/env"
 )
 
-var PG *sql.DB
+var DB *sql.DB
 var err error
 
 func Init() {
-	PG, err = sql.Open(env.Postgres, env.Pg_dsn)
+	DB, err = sql.Open(env.Postgres, env.Pg_dsn)
 
 	if err != nil {
 		log.Fatal(err)
 	}
-	if err = PG.Ping(); err != nil {
+	if err = DB.Ping(); err != nil {
 		log.Fatal(err)
 	}
 

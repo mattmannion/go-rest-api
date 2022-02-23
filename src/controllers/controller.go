@@ -71,25 +71,3 @@ func nf(w http.ResponseWriter, r *http.Request) {
 }
 
 func other(w http.ResponseWriter, r *http.Request) { w.WriteHeader(200) }
-
-///////////////////////////////////////
-//////////// Get By ID ////////////////
-///////////////////////////////////////
-
-type req_body struct {
-	ID int
-}
-
-type fn_get_one func(w http.ResponseWriter, r *http.Request, id int)
-
-func GetByID(get_one fn_get_one, get_all http.HandlerFunc, w http.ResponseWriter, r *http.Request) {
-	var rb req_body
-	json.NewDecoder(r.Body).Decode(&rb)
-
-	if rb.ID > 0 {
-		get_one(w, r, rb.ID)
-		return
-	}
-
-	get_all(w, r)
-}
