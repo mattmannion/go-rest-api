@@ -1,4 +1,4 @@
-package controller_root
+package root
 
 import (
 	"encoding/json"
@@ -6,13 +6,13 @@ import (
 	"net/http"
 )
 
-type get_one struct {
+type get_one_by_id struct {
 	Status string `json:"status"`
 	ID     int    `json:"id"`
 }
 
-func RootGetOne(w http.ResponseWriter, r *http.Request, id int) {
-	json, err := json.Marshal(get_one{Status: "good", ID: id})
+func get_one(w http.ResponseWriter, r *http.Request, id int) {
+	json, err := json.Marshal(get_one_by_id{Status: "good", ID: id})
 	if err != nil {
 		log.Fatal(err)
 	}

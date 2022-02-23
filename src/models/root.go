@@ -1,4 +1,4 @@
-package model_root
+package models
 
 type root_json struct {
 	Status string `json:"status"`

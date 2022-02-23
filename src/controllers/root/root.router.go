@@ -1,15 +1,15 @@
-package controller_root
+package root
 
 import (
 	"mm/pkg/src/controllers"
 	"net/http"
 )
 
-var RootRouter http.HandlerFunc = controllers.ControlSwitch(
+var Router http.HandlerFunc = controllers.ControlSwitch(
 	controllers.Methods{
-		Get:    RootGet,
-		Post:   RootPost,
-		Put:    RootPut,
-		Patch:  RootPut,
-		Delete: RootDelete,
+		Get:    get,
+		Post:   post,
+		Put:    put,
+		Patch:  put,
+		Delete: delete,
 	})

@@ -1,14 +1,14 @@
-package controller_root
+package root
 
 import (
 	"encoding/json"
 	"log"
-	model_root "mm/pkg/src/models/root"
+	"mm/pkg/src/models"
 	"net/http"
 )
 
-func RootGetAll(w http.ResponseWriter, r *http.Request) {
-	json, err := json.Marshal(model_root.RootDataGetALL)
+func get_all(w http.ResponseWriter, r *http.Request) {
+	json, err := json.Marshal(models.RootDataGetALL)
 	if err != nil {
 		log.Fatal(err)
 	}

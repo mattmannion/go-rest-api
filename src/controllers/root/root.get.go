@@ -1,22 +1,10 @@
-package controller_root
+package root
 
 import (
-	"encoding/json"
+	"mm/pkg/src/controllers"
 	"net/http"
 )
 
-type req_body struct {
-	ID int
-}
-
-func RootGet(w http.ResponseWriter, r *http.Request) {
-	var rb req_body
-	json.NewDecoder(r.Body).Decode(&rb)
-
-	if rb.ID > 0 {
-		RootGetOne(w, r, rb.ID)
-		return
-	}
-
-	RootGetAll(w, r)
+func get(w http.ResponseWriter, r *http.Request) {
+	controllers.GetByID(get_one, get_all, w, r)
 }
