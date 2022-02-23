@@ -16,41 +16,34 @@ type Methods struct {
 	Delete controller
 }
 
+func check_controller(c controller, w http.ResponseWriter, r *http.Request) {
+	if c == nil {
+		c = nf
+	}
+	c(w, r)
+}
+
 func ControlSwitch(m Methods) http.HandlerFunc {
 	return http.HandlerFunc(
 		func(w http.ResponseWriter, r *http.Request) {
+
 			method := strings.ToUpper(r.Method)
 
 			switch method {
 			case http.MethodGet:
-				if m.Get == nil {
-					m.Get = nf
-				}
-				m.Get(w, r)
+				check_controller(m.Get, w, r)
 
 			case http.MethodPost:
-				if m.Post == nil {
-					m.Post = nf
-				}
-				m.Post(w, r)
+				check_controller(m.Post, w, r)
 
 			case http.MethodPut:
-				if m.Put == nil {
-					m.Put = nf
-				}
-				m.Put(w, r)
+				check_controller(m.Put, w, r)
 
 			case http.MethodPatch:
-				if m.Patch == nil {
-					m.Patch = nf
-				}
-				m.Patch(w, r)
+				check_controller(m.Patch, w, r)
 
 			case http.MethodDelete:
-				if m.Delete == nil {
-					m.Delete = nf
-				}
-				m.Delete(w, r)
+				check_controller(m.Delete, w, r)
 
 			case http.MethodOptions, http.MethodHead:
 				other(w, r)
