@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func RootDeleteOne(w http.ResponseWriter, r *http.Request) {
+func RootDelete(w http.ResponseWriter, r *http.Request) {
 	json, err := json.Marshal(model_root.RootDataGetALL)
 	if err != nil {
 		log.Fatal(err)

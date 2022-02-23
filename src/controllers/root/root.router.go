@@ -7,6 +7,9 @@ import (
 
 var RootRouter http.HandlerFunc = controllers.ControlSwitch(
 	controllers.Methods{
-		Get:  RootGet,
-		Post: RootPost,
+		Get:    RootGet,
+		Post:   RootPost,
+		Put:    RootPut,
+		Patch:  RootPut,
+		Delete: RootDelete,
 	})

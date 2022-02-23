@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func RootPutOne(w http.ResponseWriter, r *http.Request) {
+func RootPut(w http.ResponseWriter, r *http.Request) {
 	json, err := json.Marshal(model_root.RootDataPut)
 	if err != nil {
 		log.Fatal(err)
