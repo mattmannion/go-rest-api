@@ -18,6 +18,7 @@ func get_one(w http.ResponseWriter, r *http.Request, id int) {
 	}
 
 	user := models.Users{}
+
 	err = row.Scan(&user.ID, &user.Name)
 	if err == sql.ErrNoRows {
 		controllers.ResultNotFound(w, r)
