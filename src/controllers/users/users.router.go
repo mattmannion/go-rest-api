@@ -7,5 +7,9 @@ import (
 
 var Router http.HandlerFunc = controllers.ControlSwitch(
 	controllers.Methods{
-		Get: get,
+		Get:    get,
+		Post:   post,
+		Put:    put,
+		Patch:  put,
+		Delete: delete,
 	})

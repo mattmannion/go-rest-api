@@ -6,8 +6,6 @@ import (
 	"mm/pkg/src/env"
 	"mm/pkg/src/router"
 	"net/http"
-
-	_ "github.com/lib/pq"
 )
 
 func main() {
