@@ -11,15 +11,10 @@ import (
 )
 
 func get_one(w http.ResponseWriter, r *http.Request, id int) {
-	row := db.DB.QueryRow("select * from users where id = $1", id)
-	err := row.Err()
-	if err != nil {
-		log.Println(err)
-	}
+	row := db.DB.QueryRow(r.Context(), "select * from users where id = $1", id)
 
 	user := models.Users{}
-
-	err = row.Scan(&user.ID, &user.Name)
+	err := row.Scan(&user.ID, &user.Name)
 	if err == sql.ErrNoRows {
 		controllers.ResultNotFound(w, r)
 		return

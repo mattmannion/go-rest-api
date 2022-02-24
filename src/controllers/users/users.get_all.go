@@ -9,7 +9,7 @@ import (
 )
 
 func get_all(w http.ResponseWriter, r *http.Request) {
-	rows, err := db.DB.Query("select * from users")
+	rows, err := db.DB.Query(r.Context(), "select * from users order by id")
 	if err != nil {
 		log.Println(err)
 	}
