@@ -25,11 +25,11 @@ func put(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// overwrites the select all values
 	// if name is not empty
 	if prev_user.Name != "" {
 		user.Name = prev_user.Name
 	}
+
 	json, _ := json.Marshal(user)
 
 	_, err = db.DB.Exec(r.Context(), `
