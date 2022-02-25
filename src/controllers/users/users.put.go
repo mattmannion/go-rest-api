@@ -1,7 +1,6 @@
 package users
 
 import (
-	"database/sql"
 	"encoding/json"
 	"log"
 	"mm/pkg/src/controllers"
@@ -21,12 +20,8 @@ func put(w http.ResponseWriter, r *http.Request) {
 	row := db.DB.QueryRow(r.Context(), "select * from users where id = $1", user.ID)
 
 	err := row.Scan(&user.ID, &user.Name)
-	if err == sql.ErrNoRows {
-		controllers.ResultNotFound(w, r)
-		return
-	}
 	if err != nil {
-		log.Println(err)
+		controllers.ResultNotFound(w, r)
 		return
 	}
 

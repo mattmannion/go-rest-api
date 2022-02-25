@@ -14,7 +14,6 @@ var err error
 
 func Init() {
 	DB, err = pgxpool.Connect(context.Background(), env.Pg_dsn)
-	// DB, err = sql.Open(env.Postgres, env.Pg_dsn)
 
 	if err != nil {
 		log.Fatal(err)

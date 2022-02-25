@@ -42,18 +42,19 @@ func post(w http.ResponseWriter, r *http.Request) {
 
 	// -- start - brute force last id retrieval
 	// very slow...
-	rows, err := db.DB.Query(r.Context(), "select * from users")
-	if err != nil {
-		log.Println(err)
-	}
+	rows, _ := db.DB.Query(r.Context(), "select * from users order by id")
 	defer rows.Close()
 
-	//
-	var id int = 0
+	users := make([]models.Users, 0)
+
 	for rows.Next() {
-		id++
+		user := models.Users{}
+		rows.Scan(&user.ID, &user.Name)
+		users = append(users, user)
 	}
-	user.ID = id
+
+	// getting the last id
+	user.ID = users[len(users)-1].ID
 	// -- end - brute force last id retrieval
 
 	json, err := json.Marshal(user)
