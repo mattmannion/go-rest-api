@@ -15,10 +15,10 @@ func post(w http.ResponseWriter, r *http.Request) {
 
 	if user.Name == "" {
 		error := struct {
-			Error string       `json:"msg"`
+			Error string       `json:"error"`
 			User  models.Users `json:"user"`
 		}{
-			Error: "Data requires the following format:",
+			Error: "Data requires the following format",
 			User: models.Users{
 				Name: "Enter a name here",
 			},
@@ -49,7 +49,9 @@ func post(w http.ResponseWriter, r *http.Request) {
 
 	for rows.Next() {
 		user := models.Users{}
+
 		rows.Scan(&user.ID, &user.Name)
+
 		users = append(users, user)
 	}
 

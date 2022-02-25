@@ -1,7 +1,6 @@
 package users
 
 import (
-	"database/sql"
 	"encoding/json"
 	"log"
 	"mm/pkg/src/controllers"
@@ -15,12 +14,8 @@ func get_one(w http.ResponseWriter, r *http.Request, id int) {
 
 	user := models.Users{}
 	err := row.Scan(&user.ID, &user.Name)
-	if err == sql.ErrNoRows {
-		controllers.ResultNotFound(w, r)
-		return
-	}
 	if err != nil {
-		log.Println(err)
+		controllers.ResultNotFound(w, r)
 		return
 	}
 

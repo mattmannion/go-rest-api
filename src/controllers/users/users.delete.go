@@ -27,7 +27,7 @@ func delete(w http.ResponseWriter, r *http.Request) {
 		Msg  string       `json:"msg"`
 		User models.Users `json:"user"`
 	}{
-		Msg:  "User deleted:",
+		Msg:  "User deleted",
 		User: user,
 	}
 	json, _ := json.Marshal(deleted)

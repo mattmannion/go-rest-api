@@ -15,7 +15,7 @@ func put(w http.ResponseWriter, r *http.Request) {
 	json.NewDecoder(r.Body).Decode(&user)
 
 	// stores values from the request
-	post_user := user
+	prev_user := user
 
 	row := db.DB.QueryRow(r.Context(), "select * from users where id = $1", user.ID)
 
@@ -27,8 +27,8 @@ func put(w http.ResponseWriter, r *http.Request) {
 
 	// overwrites the select all values
 	// if name is not empty
-	if post_user.Name != "" {
-		user.Name = post_user.Name
+	if prev_user.Name != "" {
+		user.Name = prev_user.Name
 	}
 	json, _ := json.Marshal(user)
 
