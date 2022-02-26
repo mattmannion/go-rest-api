@@ -30,8 +30,6 @@ func put(w http.ResponseWriter, r *http.Request) {
 		user.Name = prev_user.Name
 	}
 
-	json, _ := json.Marshal(user)
-
 	_, err = db.DB.Exec(r.Context(), `
 		update users set name=$2
 		where id = $1
@@ -39,6 +37,11 @@ func put(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println(err)
 	}
+
+	json, _ := json.Marshal(models.MsgSingleUser{
+		Msg:  "User updated",
+		User: user,
+	})
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(200)

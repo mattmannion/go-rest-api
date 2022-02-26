@@ -23,14 +23,10 @@ func delete(w http.ResponseWriter, r *http.Request) {
 
 	db.DB.Exec(r.Context(), "delete from users where id=$1", user.ID)
 
-	deleted := struct {
-		Msg  string       `json:"msg"`
-		User models.Users `json:"user"`
-	}{
+	json, _ := json.Marshal(models.MsgSingleUser{
 		Msg:  "User deleted",
 		User: user,
-	}
-	json, _ := json.Marshal(deleted)
+	})
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(200)

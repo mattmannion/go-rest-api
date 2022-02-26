@@ -2,7 +2,6 @@ package users
 
 import (
 	"encoding/json"
-	"log"
 	"mm/pkg/src/controllers"
 	"mm/pkg/src/db"
 	"mm/pkg/src/models"
@@ -19,15 +18,10 @@ func get_one(w http.ResponseWriter, r *http.Request, id int) {
 		return
 	}
 
-	json, err := json.Marshal(user)
-
-	if err != nil {
-		log.Println(err)
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(500)
-		w.Write([]byte("error-500"))
-		return
-	}
+	json, _ := json.Marshal(models.MsgSingleUser{
+		Msg:  "User retrieved",
+		User: user,
+	})
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(200)

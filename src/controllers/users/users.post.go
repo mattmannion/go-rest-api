@@ -59,10 +59,10 @@ func post(w http.ResponseWriter, r *http.Request) {
 	user.ID = users[len(users)-1].ID
 	// -- end - brute force last id retrieval
 
-	json, err := json.Marshal(user)
-	if err != nil {
-		log.Println(err)
-	}
+	json, _ := json.Marshal(models.MsgSingleUser{
+		Msg:  "User created",
+		User: user,
+	})
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(200)

@@ -28,15 +28,10 @@ func get_all(w http.ResponseWriter, r *http.Request) {
 		users = append(users, user)
 	}
 
-	json, err := json.Marshal(users)
-
-	if err != nil {
-		log.Println(err)
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(500)
-		w.Write([]byte("error-500"))
-		return
-	}
+	json, _ := json.Marshal(models.MsgManyUsers{
+		Msg:   "Users retrieved",
+		Users: users,
+	})
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(200)
